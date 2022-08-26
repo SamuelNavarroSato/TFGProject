@@ -4,9 +4,9 @@ using System.Collections;
 public class CardManager : MonoBehaviour
 {
     public const int cardColumns = 4;
-    public const int cardRows = 4;
-    public const float offsetX = 2f;
-    public const float offsetY = 2f;
+    public const int cardRows = 3;
+    public const float offsetX = 5f;
+    public const float offsetY = 3f;
 
     public Transform original;
     public Card[] deck;
@@ -22,7 +22,13 @@ public class CardManager : MonoBehaviour
         {
             for (int j = 0; j < cardRows; j++)
             {
-                Card card = Instantiate(deck[i + j]);
+                Card card = Instantiate(deck[i + (j * 4)]);
+
+                float posX = (offsetX * i) + original.position.x;
+                float posY = (offsetY * -j) + original.position.y;
+                card.transform.position = new Vector3(posX, posY, original.position.z);
+
+                deck[i + (j * 4)] = card;
             }
         }
 	}
@@ -40,6 +46,14 @@ public class CardManager : MonoBehaviour
             Card card = deck[rnd];
             deck[rnd] = deck[i];
             deck[i] = card;
+        }
+    }
+
+    public void FlipAllCards()
+    {
+        for (int i = 0; i < deck.Length; i++)
+        {
+            deck[i].Flip();
         }
     }
 }
