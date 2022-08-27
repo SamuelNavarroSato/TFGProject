@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public CardManager cardManager;
-    public Camera cameraManager;
 
     public GameState state;
 
@@ -20,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        UpdateGameState(GameState.PHASE_2);
+        UpdateGameState(GameState.PHASE_A_P1);
     }
 
     public void UpdateGameState(GameState newState)
@@ -29,12 +28,23 @@ public class GameManager : MonoBehaviour
 
         switch (newState)
         {
-            case GameState.PHASE_1:
-                HandlePhase1();
+            case GameState.PHASE_A_P1:
+                HandlePhaseA_P1();
                 break;
-            case GameState.PHASE_2:
+            case GameState.PHASE_A_P2:
+                HandlePhaseA_P2();
                 break;
-            case GameState.PHASE_3:
+            case GameState.PHASE_B_P1:
+                HandlePhaseB_P1();
+                break;
+            case GameState.PHASE_B_P2:
+                HandlePhaseB_P2();
+                break;
+            case GameState.PHASE_C_P1:
+                HandlePhaseC_P1();
+                break;
+            case GameState.PHASE_C_P2:
+                HandlePhaseC_P2();
                 break;
             default:
                 Debug.Log("Error");
@@ -44,7 +54,32 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(newState);
     }
 
-    private void HandlePhase1()
+    private void HandlePhaseA_P1()
+    {
+
+    }
+
+    private void HandlePhaseA_P2()
+    {
+
+    }
+
+    private void HandlePhaseB_P1()
+    {
+
+    }
+
+    private void HandlePhaseB_P2()
+    {
+
+    }
+
+    private void HandlePhaseC_P1()
+    {
+
+    }
+
+    private void HandlePhaseC_P2()
     {
 
     }
@@ -52,7 +87,10 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
-    PHASE_1,
-    PHASE_2,
-    PHASE_3
+    PHASE_A_P1,
+    PHASE_A_P2,
+    PHASE_B_P1,
+    PHASE_B_P2,
+    PHASE_C_P1,
+    PHASE_C_P2
 }

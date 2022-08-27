@@ -16,14 +16,9 @@ public class CardManager : MonoBehaviour
         GameManager.OnGameStateChanged += WhenGameStateChanges;
     }
 
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= WhenGameStateChanges;
-    }
-
     private void WhenGameStateChanges(GameState currentState)
     {
-        if (currentState == GameState.PHASE_2)
+        if (currentState == GameState.PHASE_A_P2)
         {
             SetupPairGame();
         }
@@ -40,6 +35,11 @@ public class CardManager : MonoBehaviour
     {
 	
 	}
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= WhenGameStateChanges;
+    }
 
     private void SetupPairGame()
     {
