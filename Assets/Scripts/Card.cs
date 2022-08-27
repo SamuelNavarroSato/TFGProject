@@ -5,6 +5,12 @@ public class Card : MonoBehaviour {
 
     private Quaternion desiredRotation;
 
+    [SerializeField] public GameObject text;
+
+    public string value = "";
+
+    public bool main = false; // Only true if it has the keyword
+
 	// Use this for initialization
 	void Start ()
     {
@@ -31,5 +37,23 @@ public class Card : MonoBehaviour {
     private void OnMouseUp()
     {
         Flip(); 
+    }
+
+    public void Setup(string value, bool main)
+    {
+        this.value = value;
+        this.main = main;
+
+        SetCardText(value);
+    }
+
+    private void SetCardText(string value)
+    {
+        text.GetComponent<TMPro.TextMeshPro>().text = value;
+    }
+
+    public void Destroy()
+    {
+        DestroyImmediate(this, true);
     }
 }
