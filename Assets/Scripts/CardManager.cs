@@ -11,8 +11,37 @@ public class CardManager : MonoBehaviour
     public Transform original;
     public Card[] deck;
 
+    void Awake()
+    {
+        GameManager.OnGameStateChanged += WhenGameStateChanges;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= WhenGameStateChanges;
+    }
+
+    private void WhenGameStateChanges(GameState currentState)
+    {
+        if (currentState == GameState.PHASE_2)
+        {
+            SetupPairGame();
+        }
+    }
+
     // Use this for initialization
     private void Start ()
+    {
+        
+    }
+	
+	// Update is called once per frame
+	void Update ()
+    {
+	
+	}
+
+    private void SetupPairGame()
     {
         Vector3 startPos = original.transform.position;
 
@@ -24,6 +53,8 @@ public class CardManager : MonoBehaviour
             {
                 Card card = Instantiate(deck[i + (j * 4)]);
 
+                card.Setup("Name", true);
+
                 float posX = (offsetX * i) + original.position.x;
                 float posY = (offsetY * -j) + original.position.y;
                 card.transform.position = new Vector3(posX, posY, original.position.z);
@@ -31,12 +62,7 @@ public class CardManager : MonoBehaviour
                 deck[i + (j * 4)] = card;
             }
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 
     private void ShuffleDeck(Card[] deck) // Shuffles the deck by interchanging the cards position randomly in increased number
     {
