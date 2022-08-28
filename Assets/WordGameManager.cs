@@ -26,11 +26,17 @@ public class WordGameManager : MonoBehaviour
 
     private void WhenGameStateChanges(GameState currentState)
     {
-        if (currentState == GameState.PHASE_A_P1 || currentState == GameState.PHASE_A_P2)
+        if (currentState == GameState.PHASE_A_P1)
         {
             wordGameCanvas.SetActive(true);
 
-            Setup();
+            Setup(PlayerEnum.PLAYER_1);
+        }
+        else if (currentState == GameState.PHASE_A_P2)
+        {
+            wordGameCanvas.SetActive(true);
+
+            Setup(PlayerEnum.PLAYER_2);
         }
         else
         {
@@ -71,7 +77,10 @@ public class WordGameManager : MonoBehaviour
         {
             counter.GetComponent<TMPro.TextMeshProUGUI>().text = (current).ToString();
 
-            displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(current - 1);
+            if (GameManager.Instance.state == GameState.PHASE_A_P1)
+                displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(PlayerEnum.PLAYER_1, current - 1);
+            else if (GameManager.Instance.state == GameState.PHASE_A_P2)
+                displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(PlayerEnum.PLAYER_2, current - 1);
 
             updateDisplay = false;
         }   
@@ -82,14 +91,17 @@ public class WordGameManager : MonoBehaviour
         GameManager.OnGameStateChanged -= WhenGameStateChanges;
     }
 
-    private void Setup()
+    private void Setup(PlayerEnum player)
     {
-        displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(current - 1);
+        displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(player, current - 1);
     }
 
     public void WordSubmission(GameObject submittedTextGO)
     {
-        cardManager.deck[current + cardManager.pairs - 1].SetCardText(submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
+        if (GameManager.Instance.state == GameState.PHASE_A_P1)
+            cardManager.SetCardText(PlayerEnum.PLAYER_1, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
+        else if (GameManager.Instance.state == GameState.PHASE_A_P2)
+            cardManager.SetCardText(PlayerEnum.PLAYER_2, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
 
         submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
 

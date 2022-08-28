@@ -9,7 +9,9 @@ public class CardManager : MonoBehaviour
     public const float offsetY = 3f;
 
     public Transform original;
-    public Card[] deck;
+
+    [SerializeField] public PlayerManager player1;
+    [SerializeField] public PlayerManager player2;
 
     public int pairs = 0;
 
@@ -26,17 +28,25 @@ public class CardManager : MonoBehaviour
     {
         if (currentState == GameState.PHASE_A_P1)
         {
+            SetupDeck(RetrieveDeck(PlayerEnum.PLAYER_1));
         }
-        if (currentState == GameState.PHASE_B_P1)
+        else if (currentState == GameState.PHASE_A_P2)
         {
-            SetupPairGame();
+            SetupDeck(RetrieveDeck(PlayerEnum.PLAYER_2));
+        }
+        else if (currentState == GameState.PHASE_B_P1)
+        {
+            SetupPairGame(RetrieveDeck(PlayerEnum.PLAYER_2)); // Player 1 has Player 2's deck on display
+        }
+        else if (currentState == GameState.PHASE_B_P1)
+        {
+            SetupPairGame(RetrieveDeck(PlayerEnum.PLAYER_1));
         }
     }
 
     // Use this for initialization
     private void Start ()
     {
-        SetupDeck();
     }
 	
 	// Update is called once per frame
@@ -50,7 +60,7 @@ public class CardManager : MonoBehaviour
         GameManager.OnGameStateChanged -= WhenGameStateChanges;
     }
 
-    public void SetupDeck()
+    public void SetupDeck(Card[] deck)
     {
         for (int i = 0; i < deck.Length; i++)
         {
@@ -74,10 +84,26 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private void SetupPairGame()
+    private Card[] RetrieveDeck(PlayerEnum player)
+    {
+        Card[] ret;
+
+        if (player == PlayerEnum.PLAYER_1)
+        {
+            ret = player1.deck;
+        }
+        else
+        {
+            ret = player2.deck;
+        }
+
+        return ret;
+    }
+
+    private void SetupPairGame(Card[] deck)
     {
         Vector3 startPos = original.transform.position;
-
+        
         for (int i = 0; i < cardColumns; i++)
         {
             for (int j = 0; j < cardRows; j++)
@@ -88,10 +114,10 @@ public class CardManager : MonoBehaviour
             }
         }
 
-        ShuffleDeck();
+        ShuffleDeck(deck);
     }
 
-    public void ShuffleDeck() // Shuffles the deck by interchanging the cards position randomly in increased number
+    public void ShuffleDeck(Card[] deck) // Shuffles the deck by interchanging the cards position randomly in increased number
     {
         for (int i = 0; i < deck.Length - 1; i++)
         {
@@ -102,7 +128,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public void FlipAllCards()
+    public void FlipAllCards(Card[] deck)
     {
         for (int i = 0; i < deck.Length; i++)
         {
@@ -110,11 +136,18 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public string GetCardText(int position)
+    public string GetCardText(PlayerEnum player, int position)
     {
-        return deck[position].value;
+        Card[] ret = RetrieveDeck(player);
+
+        return ret[position].value;
     }
-   
+
+    public void SetCardText(PlayerEnum player, int position, string value)
+    {
+        RetrieveDeck(player)[position].SetCardText(value);
+    }
+
     private void LoadWords()
     {
         words = new string[50];

@@ -94,3 +94,9 @@ public enum GameState
     PHASE_C_P1,
     PHASE_C_P2
 }
+
+public enum PlayerEnum
+{
+    PLAYER_1,
+    PLAYER_2
+}
