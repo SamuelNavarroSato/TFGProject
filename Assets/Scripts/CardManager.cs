@@ -36,7 +36,6 @@ public class CardManager : MonoBehaviour
     // Use this for initialization
     private void Start ()
     {
-
         SetupDeck();
     }
 	
@@ -53,7 +52,15 @@ public class CardManager : MonoBehaviour
 
     public void SetupDeck()
     {
+        for (int i = 0; i < deck.Length; i++)
+        {
+            deck[i] = Instantiate(deck[i]);            
+            deck[i].transform.position = new Vector3(100f, 100f, 100f);
+        }
+        
+
         pairs = deck.Length / 2;
+
 
         for (int i = 0; i < pairs; i++)
         {
@@ -77,13 +84,9 @@ public class CardManager : MonoBehaviour
         {
             for (int j = 0; j < cardRows; j++)
             {
-                Card card = Instantiate(deck[i + (j * 4)]);
-
                 float posX = (offsetX * i) + original.position.x;
                 float posY = (offsetY * -j) + original.position.y;
-                card.transform.position = new Vector3(posX, posY, original.position.z);
-
-                deck[i + (j * 4)] = card;
+                deck[i + (j * 4)].transform.position = new Vector3(posX, posY, original.position.z);
             }
         }
 
