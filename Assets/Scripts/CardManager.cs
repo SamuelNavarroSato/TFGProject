@@ -69,8 +69,6 @@ public class CardManager : MonoBehaviour
             deck[i].Setup(words[rnd], true); // Main card, having a word
             deck[i].SetPair(deck[i + pairs]);
 
-            Debug.Log(deck[i].value);
-
             deck[i + pairs].Setup("", false); // Other card of the pair, being the one which has to be edited
             deck[i + pairs].SetPair(deck[i]);
         }
@@ -128,7 +126,7 @@ public class CardManager : MonoBehaviour
         words[5] = "HOBBY";
         words[6] = "DEPORTE";
         words[7] = "TRABAJO";
-        words[8] = "AMIGO/A";
+        words[8] = "AMIG@";
         words[9] = "ANIMAL";
         words[10] = "SERIE";
         words[11] = "DIVERTIDO"; // Sentimientos
@@ -164,7 +162,7 @@ public class CardManager : MonoBehaviour
         words[41] = "GAFAS";
         words[42] = "NAVIDAD";
         words[43] = "CUMPLEAÑOS";
-        words[44] = "FAMOSO/A";
+        words[44] = "FAMOS@";
         words[45] = "JUEGO";
         words[46] = "MEDIANOCHE";
         words[47] = "REGALO";

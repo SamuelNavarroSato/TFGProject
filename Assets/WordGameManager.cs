@@ -12,10 +12,11 @@ public class WordGameManager : MonoBehaviour
     [SerializeField] public GameObject displayWord;
     public GameObject inputWord;
 
-    public int wordsLeft = 6;
-
     public int[] positions;
     public string[] words;
+
+    private int current = 1;
+    private bool updateDisplay = false;
     
 
     void Awake()
@@ -29,6 +30,7 @@ public class WordGameManager : MonoBehaviour
         {
             wordGameCanvas.SetActive(true);
 
+            Setup();
         }
         else
         {
@@ -39,7 +41,6 @@ public class WordGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Setup();
 
     }
 
@@ -48,8 +49,32 @@ public class WordGameManager : MonoBehaviour
     {
         if (wordGameCanvas)
         {
-
+            if (current > cardManager.pairs)
+            {
+                if (GameManager.Instance.state == GameState.PHASE_A_P1)
+                {
+                    current = 1;
+                    GameManager.Instance.UpdateGameState(GameState.PHASE_A_P2);
+                }
+                else if (GameManager.Instance.state == GameState.PHASE_A_P2)
+                {
+                    current = 1;
+                    GameManager.Instance.UpdateGameState(GameState.PHASE_B_P1);
+                }
+            }
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (updateDisplay)
+        {
+            counter.GetComponent<TMPro.TextMeshProUGUI>().text = (current).ToString();
+
+            displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(current - 1);
+
+            updateDisplay = false;
+        }   
     }
 
     private void OnDestroy()
@@ -59,6 +84,17 @@ public class WordGameManager : MonoBehaviour
 
     private void Setup()
     {
-        displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(0);
+        displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(current - 1);
+    }
+
+    public void WordSubmission(GameObject submittedTextGO)
+    {
+        cardManager.deck[current + cardManager.pairs - 1].SetCardText(submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
+
+        submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
+
+        ++current;
+
+        updateDisplay = true;
     }
 }
