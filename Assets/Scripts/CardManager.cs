@@ -11,14 +11,23 @@ public class CardManager : MonoBehaviour
     public Transform original;
     public Card[] deck;
 
+    public int pairs = 0;
+
+    private string[] words;
+
     void Awake()
     {
         GameManager.OnGameStateChanged += WhenGameStateChanges;
+
+        LoadWords();
     }
 
     private void WhenGameStateChanges(GameState currentState)
     {
-        if (currentState == GameState.PHASE_A_P2)
+        if (currentState == GameState.PHASE_A_P1)
+        {
+        }
+        if (currentState == GameState.PHASE_B_P1)
         {
             SetupPairGame();
         }
@@ -27,7 +36,8 @@ public class CardManager : MonoBehaviour
     // Use this for initialization
     private void Start ()
     {
-        
+
+        SetupDeck();
     }
 	
 	// Update is called once per frame
@@ -41,19 +51,33 @@ public class CardManager : MonoBehaviour
         GameManager.OnGameStateChanged -= WhenGameStateChanges;
     }
 
+    public void SetupDeck()
+    {
+        pairs = deck.Length / 2;
+
+        for (int i = 0; i < pairs; i++)
+        {
+            int rnd = Random.Range(i, words.Length);
+
+            deck[i].Setup(words[rnd], true); // Main card, having a word
+            deck[i].SetPair(deck[i + pairs]);
+
+            Debug.Log(deck[i].value);
+
+            deck[i + pairs].Setup("", false); // Other card of the pair, being the one which has to be edited
+            deck[i + pairs].SetPair(deck[i]);
+        }
+    }
+
     private void SetupPairGame()
     {
         Vector3 startPos = original.transform.position;
-
-        ShuffleDeck(deck);
 
         for (int i = 0; i < cardColumns; i++)
         {
             for (int j = 0; j < cardRows; j++)
             {
                 Card card = Instantiate(deck[i + (j * 4)]);
-
-                card.Setup("Name", true);
 
                 float posX = (offsetX * i) + original.position.x;
                 float posY = (offsetY * -j) + original.position.y;
@@ -62,9 +86,11 @@ public class CardManager : MonoBehaviour
                 deck[i + (j * 4)] = card;
             }
         }
+
+        ShuffleDeck();
     }
 
-    private void ShuffleDeck(Card[] deck) // Shuffles the deck by interchanging the cards position randomly in increased number
+    public void ShuffleDeck() // Shuffles the deck by interchanging the cards position randomly in increased number
     {
         for (int i = 0; i < deck.Length - 1; i++)
         {
@@ -81,5 +107,66 @@ public class CardManager : MonoBehaviour
         {
             deck[i].Flip();
         }
+    }
+
+    public string GetCardText(int position)
+    {
+        return deck[position].value;
+    }
+   
+    private void LoadWords()
+    {
+        words = new string[50];
+        words[0] = "VACACIONES"; // Temas de Conversación
+        words[1] = "VIAJE";
+        words[2] = "MÚSICA";
+        words[3] = "LIBRO";
+        words[4] = "POSTRE";
+        words[5] = "HOBBY";
+        words[6] = "DEPORTE";
+        words[7] = "TRABAJO";
+        words[8] = "AMIGO/A";
+        words[9] = "ANIMAL";
+        words[10] = "SERIE";
+        words[11] = "DIVERTIDO"; // Sentimientos
+        words[12] = "PÁNICO";
+        words[13] = "SUSTO";
+        words[14] = "TRISTE";
+        words[15] = "BUENO"; // Adjetivos
+        words[16] = "FRÍO";
+        words[17] = "CALIENTE";
+        words[18] = "RAPIDO";
+        words[19] = "LENTO";
+        words[20] = "FÁCIL";
+        words[21] = "DIFERENTE";
+        words[22] = "FUERTE";
+        words[23] = "DULCE";
+        words[24] = "SALADO";
+        words[25] = "GRANDE";
+        words[26] = "REFRESCANTE";
+        words[27] = "ALEGRE";
+        words[28] = "PEQUEÑO";
+        words[29] = "EXTRAÑO";
+        words[30] = "ESPECIAL";
+        words[31] = "SALVAJE";
+        words[32] = "REDONDO";
+        words[33] = "ITALIANO";
+        words[34] = "ROJO"; // COLORES
+        words[35] = "NARANJA";
+        words[36] = "AZUL";
+        words[37] = "VERDE";
+        words[38] = "VIOLETA";
+        words[39] = "MITAD"; // MISCELANEA
+        words[40] = "CIUDAD";
+        words[41] = "GAFAS";
+        words[42] = "NAVIDAD";
+        words[43] = "CUMPLEAÑOS";
+        words[44] = "FAMOSO/A";
+        words[45] = "JUEGO";
+        words[46] = "MEDIANOCHE";
+        words[47] = "REGALO";
+        words[48] = "PRIMERO";
+        words[49] = "DESAYUNO";
+
     }
 }

@@ -5,9 +5,11 @@ public class Card : MonoBehaviour {
 
     private Quaternion desiredRotation;
 
-    [SerializeField] public GameObject text;
+    [SerializeField] public GameObject textComponent;
 
     public string value = "";
+
+    public Card pair = null;
 
     public bool main = false; // Only true if it has the keyword
 
@@ -47,9 +49,14 @@ public class Card : MonoBehaviour {
         SetCardText(value);
     }
 
-    private void SetCardText(string value)
+    public void SetPair(Card pair)
     {
-        text.GetComponent<TMPro.TextMeshPro>().text = value;
+        this.pair = pair;
+    }
+
+    public void SetCardText(string value)
+    {
+        textComponent.GetComponent<TMPro.TextMeshPro>().text = value;
     }
 
     public void Destroy()
