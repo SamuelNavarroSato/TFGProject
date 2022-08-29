@@ -84,7 +84,7 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    private Card[] RetrieveDeck(PlayerEnum player)
+    public Card[] RetrieveDeck(PlayerEnum player)
     {
         Card[] ret;
 
@@ -132,7 +132,7 @@ public class CardManager : MonoBehaviour
     {
         for (int i = 0; i < deck.Length; i++)
         {
-            deck[i].Flip();
+            deck[i].Flip(true);
         }
     }
 
@@ -145,6 +145,7 @@ public class CardManager : MonoBehaviour
 
     public void SetCardText(PlayerEnum player, int position, string value)
     {
+        RetrieveDeck(player)[position].value = value;
         RetrieveDeck(player)[position].SetCardText(value);
     }
 

@@ -12,22 +12,34 @@ public class Card : MonoBehaviour {
     public Card pair = null;
 
     public bool main = false; // Only true if it has the keyword
+    public bool isSelected = false;
+    public bool isFound = false;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
-        desiredRotation = transform.rotation;	
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        isSelected = false;
+        isFound = false;
+        desiredRotation = transform.rotation;
+    }
+
+    // Update is called once per frame
+    void Update()
     {
+        if (isSelected)
+            Flip(true);
+        else
+            Flip(false);
+
         Rotate();
     }
 
-    public void Flip()
+    public void Flip(bool faceUp)
     {
-        desiredRotation = desiredRotation * Quaternion.Euler(180, 0, 0); // Rotates on X axis
+        if (faceUp)
+            desiredRotation = Quaternion.Euler(0, 0, 0); // Rotates on X axis
+        else
+            desiredRotation = Quaternion.Euler(180, 0, 0);
     }
 
     private void Rotate()
@@ -38,7 +50,13 @@ public class Card : MonoBehaviour {
 
     private void OnMouseUp()
     {
-        Flip(); 
+        if (!isFound)
+        {
+            if (!isSelected)
+            {
+                isSelected = true;
+            }
+        }
     }
 
     public void Setup(string value, bool main)
