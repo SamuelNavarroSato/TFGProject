@@ -38,7 +38,7 @@ public class CardManager : MonoBehaviour
         {
             SetupPairGame(RetrieveDeck(PlayerEnum.PLAYER_2)); // Player 1 has Player 2's deck on display
         }
-        else if (currentState == GameState.PHASE_B_P1)
+        else if (currentState == GameState.PHASE_B_P2)
         {
             SetupPairGame(RetrieveDeck(PlayerEnum.PLAYER_1));
         }
@@ -104,6 +104,8 @@ public class CardManager : MonoBehaviour
     {
         Vector3 startPos = original.transform.position;
         
+        ShuffleDeck(deck);
+
         for (int i = 0; i < cardColumns; i++)
         {
             for (int j = 0; j < cardRows; j++)
@@ -113,8 +115,6 @@ public class CardManager : MonoBehaviour
                 deck[i + (j * 4)].transform.position = new Vector3(posX, posY, original.position.z);
             }
         }
-
-        ShuffleDeck(deck);
     }
 
     public void ShuffleDeck(Card[] deck) // Shuffles the deck by interchanging the cards position randomly in increased number

@@ -9,6 +9,8 @@ public class PairGameManager : MonoBehaviour
     public Card[] currentDeck;
     public Card[] CheckedPairs;
 
+    public int foundPairs = 0;
+
     void Awake()
     {
         GameManager.OnGameStateChanged += WhenGameStateChanges;
@@ -39,86 +41,67 @@ public class PairGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.state == GameState.PHASE_B_P1 || GameManager.Instance.state == GameState.PHASE_B_P2)
+        if (foundPairs == cardManager.pairs)
         {
-            Check();
+            if (GameManager.Instance.state == GameState.PHASE_B_P1)
+                GameManager.Instance.UpdateGameState(GameState.PHASE_B_P2);
+            else if (GameManager.Instance.state == GameState.PHASE_B_P2)
+                GameManager.Instance.UpdateGameState(GameState.PHASE_C_P1);
         }
     }
 
-    private void Check()
+    public void Check(Card card)
     {
-        if (currentDeck.Length != 0)
+        if (!card.isFound)
         {
-            if (CheckedPairs[1] == null)
+            if (card != CheckedPairs[0] && card != CheckedPairs[1])
             {
-                for (int i = 0; i < currentDeck.Length; i++)
+                if (CheckedPairs[0] == null) // 1st Pick: Array is empty
                 {
-                    if (currentDeck[i].isSelected && currentDeck[i] != CheckedPairs[0] && currentDeck[i] != CheckedPairs[1])
-                    {
-                        if (CheckedPairs[0] == null)
-                        {
-                            CheckedPairs[0] = currentDeck[i];
-                        }
-                        else if (CheckedPairs[1] == null)
-                        {
-                            CheckedPairs[1] = currentDeck[i];
-                        }
-                        else
-                        {
-                            currentDeck[i].isSelected = false;
-                        }
+                    CheckedPairs[0] = card;
+                    CheckedPairs[0].isSelected = true;
+                    return;
+                }
+                else if (CheckedPairs[1] == null) // 2nd Pick and every 2 picks, then it should check below
+                {
+                    CheckedPairs[1] = card;
+                    CheckedPairs[1].isSelected = true;
+                }
+                else // Every 3rd pick, new pair
+                {
+                    CheckedPairs[0].isSelected = false;
+                    CheckedPairs[1].isSelected = false;
+                    CheckedPairs[1] = null;
 
-                        if (IsItPairs())
-                        {
-                            CheckedPairs[1].isFound = true;
-                            CheckedPairs[0].isFound = true;
+                    CheckedPairs[0] = card;
+                    CheckedPairs[0].isSelected = true;
+                    return;
+                }
 
-                            StartCoroutine(ResetPosition(true));
-                        }
-                        else if (!IsItPairs())
-                        {
-                            Debug.Log("Cards are not pair");
+                if (IsItPairs())
+                {
+                    CheckedPairs[1].SetFound(true);
+                    CheckedPairs[0].SetFound(true);
 
+                    CheckedPairs[1].Flip(true);
+                    CheckedPairs[0].Flip(true);
 
-                            StartCoroutine(ResetPosition(false));
-                        }
-                    }
+                    foundPairs++;
                 }
             }
+            else if (card == CheckedPairs[0] && CheckedPairs[1] != null)
+            {
+                CheckedPairs[1].isSelected = false;
+                CheckedPairs[1] = null;
+            }
+            else if (card == CheckedPairs[1])
+            {
+                CheckedPairs[1] = null;
+                CheckedPairs[0].isSelected = false;
+                CheckedPairs[0] = null;
+                CheckedPairs[0] = card;
+            }
         }
-        else
-        {
-            if (GameManager.Instance.state == GameState.PHASE_A_P1)
-                GameManager.Instance.UpdateGameState(GameState.PHASE_A_P2);
-            else if (GameManager.Instance.state == GameState.PHASE_A_P2)
-                GameManager.Instance.UpdateGameState(GameState.PHASE_B_P1);
-        }
-    }
-
-    IEnumerator ResetPosition(bool found)
-    {
-        if (found)
-        {
-            yield return new WaitForSeconds(2f);
-            CheckedPairs[0].isSelected = false;
-            CheckedPairs[1].isSelected = false;
-        }
-        else
-        {
-            yield return new WaitForSeconds(3f);
-
-            CheckedPairs[0].isSelected = false;
-            CheckedPairs[1].isSelected = false;
-
-            CheckedPairs[0].isFound = false;
-            CheckedPairs[1].isFound = false;
-        }
-
-        CheckedPairs[0] = null;
-        CheckedPairs[1] = null;
-
-        Debug.Log("End of coroutine");
-        yield return null;
     }
 
     private bool IsItPairs()

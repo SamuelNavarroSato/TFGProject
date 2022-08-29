@@ -25,7 +25,7 @@ public class Card : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         if (!isFound)
         {
             if (isSelected)
@@ -53,13 +53,7 @@ public class Card : MonoBehaviour {
 
     private void OnMouseUp()
     {
-        if (!isFound)
-        {
-            if (!isSelected)
-            {
-                isSelected = true;
-            }
-        }
+        GameObject.FindGameObjectWithTag("PairGame").GetComponent<PairGameManager>().Check(this);
     }
 
     public void Setup(string value, bool main)
@@ -73,6 +67,19 @@ public class Card : MonoBehaviour {
     public void SetPair(Card pair)
     {
         this.pair = pair;
+    }
+
+    public void SetFound(bool found)
+    {
+        if (found)
+        {
+            isFound = true;
+            textComponent.GetComponent<TMPro.TextMeshPro>().color = Color.green;
+        }
+        else
+        {
+            isFound = false;
+        }
     }
 
     public void SetCardText(string value)
