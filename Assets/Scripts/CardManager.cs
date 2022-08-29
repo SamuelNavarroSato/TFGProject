@@ -43,13 +43,12 @@ public class CardManager : MonoBehaviour
             SetupPairGame(RetrieveDeck(PlayerEnum.PLAYER_1));
         }
     }
-
-    // Use this for initialization
+    
     private void Start ()
     {
+
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
 	
@@ -64,24 +63,49 @@ public class CardManager : MonoBehaviour
     {
         for (int i = 0; i < deck.Length; i++)
         {
-            deck[i] = Instantiate(deck[i]);            
+            deck[i] = Instantiate(deck[i]);
             deck[i].transform.position = new Vector3(100f, 100f, 100f);
         }
-        
+
 
         pairs = deck.Length / 2;
+
+        int[] rnd = new int[pairs];
+
+        for (int i = 0; i < pairs; i++)
+        {
+            rnd[i] = RecursiveRandom(rnd, i); 
+        }
 
 
         for (int i = 0; i < pairs; i++)
         {
-            int rnd = Random.Range(i, words.Length);
-
-            deck[i].Setup(words[rnd], true); // Main card, having a word
+            deck[i].Setup(words[rnd[i]], true); // Main card, having a word
             deck[i].SetPair(deck[i + pairs]);
 
             deck[i + pairs].Setup("", false); // Other card of the pair, being the one which has to be edited
             deck[i + pairs].SetPair(deck[i]);
         }
+
+        rnd = null;
+    }
+
+    private int RecursiveRandom(int[] array, int position)
+    {
+        int rand = Random.Range(0, words.Length);
+
+        if (position <= 1)
+        {
+            for (int j = 0; j < position - 1; j++)
+            {
+                if (array[j] == rand)
+                {
+                    rand = RecursiveRandom(array, position);
+                }
+            }
+        }
+
+        return rand;
     }
 
     public Card[] RetrieveDeck(PlayerEnum player)

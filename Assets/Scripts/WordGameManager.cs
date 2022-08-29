@@ -44,13 +44,11 @@ public class WordGameManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (wordGameCanvas)
@@ -73,7 +71,7 @@ public class WordGameManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (updateDisplay)
+        if (updateDisplay) // Sets the text component for the new word
         {
             counter.GetComponent<TMPro.TextMeshProUGUI>().text = (current).ToString();
 
@@ -96,17 +94,24 @@ public class WordGameManager : MonoBehaviour
         displayWord.GetComponent<TMPro.TextMeshProUGUI>().text = cardManager.GetCardText(player, current - 1);
     }
 
-    public void WordSubmission(GameObject submittedTextGO)
+    public void WordSubmission(GameObject submittedTextGO) // Called every time the player inputs a word
     {
-        if (GameManager.Instance.state == GameState.PHASE_A_P1)
-            cardManager.SetCardText(PlayerEnum.PLAYER_1, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
-        else if (GameManager.Instance.state == GameState.PHASE_A_P2)
-            cardManager.SetCardText(PlayerEnum.PLAYER_2, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
+        if (submittedTextGO.GetComponent<TMPro.TMP_InputField>().text.Length <= 1) // Minimum size set to avoid missclicks.
+        {
+            return;
+        }
+        else
+        {
+            if (GameManager.Instance.state == GameState.PHASE_A_P1)
+                cardManager.SetCardText(PlayerEnum.PLAYER_1, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
+            else if (GameManager.Instance.state == GameState.PHASE_A_P2)
+                cardManager.SetCardText(PlayerEnum.PLAYER_2, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
 
-        submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
+            submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
 
-        ++current;
+            ++current;
 
-        updateDisplay = true;
+            updateDisplay = true;
+        }
     }
 }

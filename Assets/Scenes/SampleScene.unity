@@ -2024,7 +2024,7 @@ GameObject:
   - component: {fileID: 2142842457}
   m_Layer: 0
   m_Name: GAME - PART 2
-  m_TagString: Untagged
+  m_TagString: PairGame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2060,4 +2060,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardManager: {fileID: 26093949}
   currentDeck: []
-  firstCard: {fileID: 0}
+  CheckedPairs: []
+  foundPairs: 0
