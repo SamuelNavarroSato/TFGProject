@@ -47,34 +47,41 @@ public class PairGameManager : MonoBehaviour
 
     private void Check()
     {
-        if (currentDeck.Length != 0 && currentDeck[0] != null && CheckedPairs[1] == null)
+        if (currentDeck.Length != 0)
         {
-            for (int i = 0; i < currentDeck.Length; i++)
+            if (CheckedPairs[1] == null)
             {
-                if (currentDeck[i].isSelected && currentDeck[i] != CheckedPairs[0] && currentDeck[i] != CheckedPairs[1])
+                for (int i = 0; i < currentDeck.Length; i++)
                 {
-                    if (CheckedPairs[0] == null)
+                    if (currentDeck[i].isSelected && currentDeck[i] != CheckedPairs[0] && currentDeck[i] != CheckedPairs[1])
                     {
-                        CheckedPairs[0] = currentDeck[i];
-                    }
-                    else
-                    {
-                        CheckedPairs[1] = currentDeck[i];
-                    }
+                        if (CheckedPairs[0] == null)
+                        {
+                            CheckedPairs[0] = currentDeck[i];
+                        }
+                        else if (CheckedPairs[1] == null)
+                        {
+                            CheckedPairs[1] = currentDeck[i];
+                        }
+                        else
+                        {
+                            currentDeck[i].isSelected = false;
+                        }
 
-                    if (IsItPairs())
-                    {
-                        CheckedPairs[1].isFound = true;
-                        CheckedPairs[0].isFound = true;
+                        if (IsItPairs())
+                        {
+                            CheckedPairs[1].isFound = true;
+                            CheckedPairs[0].isFound = true;
 
-                        StartCoroutine(ResetPosition(true));
-                    }
-                    else if (!IsItPairs())
-                    {
-                        Debug.Log("Cards are not pair");
+                            StartCoroutine(ResetPosition(true));
+                        }
+                        else if (!IsItPairs())
+                        {
+                            Debug.Log("Cards are not pair");
 
 
-                        StartCoroutine(ResetPosition(false));
+                            StartCoroutine(ResetPosition(false));
+                        }
                     }
                 }
             }
@@ -92,13 +99,13 @@ public class PairGameManager : MonoBehaviour
     {
         if (found)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             CheckedPairs[0].isSelected = false;
             CheckedPairs[1].isSelected = false;
         }
         else
         {
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(3f);
 
             CheckedPairs[0].isSelected = false;
             CheckedPairs[1].isSelected = false;

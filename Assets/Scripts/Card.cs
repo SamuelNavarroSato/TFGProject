@@ -26,10 +26,13 @@ public class Card : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (isSelected)
-            Flip(true);
-        else
-            Flip(false);
+        if (!isFound)
+        {
+            if (isSelected)
+                Flip(true);
+            else
+                Flip(false);
+        }
 
         Rotate();
     }
