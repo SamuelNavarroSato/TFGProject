@@ -46,7 +46,7 @@ public class WordGameManager : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     void Update()
