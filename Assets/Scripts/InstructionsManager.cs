@@ -13,6 +13,8 @@ public class InstructionsManager : MonoBehaviour
     public GameObject redWord;
     public GameObject blueWord;
 
+    public GameObject insMemory;
+
     void Awake()
     {
         GameManager.OnGameStateChanged += WhenGameStateChanges;
@@ -28,6 +30,7 @@ public class InstructionsManager : MonoBehaviour
             redPair.SetActive(false);
             blueWord.SetActive(false);
             bluePair.SetActive(false);
+            insMemory.SetActive(false);
         }
         else if (currentState == GameState.PHASE_A_P2)
         {
@@ -59,6 +62,25 @@ public class InstructionsManager : MonoBehaviour
 
             blueWord.SetActive(false);
             bluePair.SetActive(true);
+        }
+        else if (currentState == GameState.PHASE_C_P1)
+        {
+            gameObject.SetActive(true);
+
+            redPlayer.SetActive(true);
+            bluePlayer.SetActive(false);
+
+            redPair.SetActive(false);
+            insMemory.SetActive(true);
+        }
+        else if (currentState == GameState.PHASE_C_P2)
+        {
+            gameObject.SetActive(true);
+
+            redPlayer.SetActive(false);
+            bluePlayer.SetActive(true);
+
+            bluePair.SetActive(false);
         }
     }
     

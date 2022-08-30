@@ -141,6 +141,44 @@ public class CardManager : MonoBehaviour
         }
     }
 
+    public Card[] SetupMemoryGame(Card[] deck, Transform trans)
+    {
+        Vector3 startPos = trans.transform.position;
+        Card[] showingCards = new Card[3];
+        Card[] ret = new Card[3];
+
+        for (int i = 0; i < deck.Length; i++)
+        {
+            if (deck[i].main == false)
+            {
+                if (showingCards[2] == null) // Cartas que se enseñan
+                {
+                    for (int j = 0; j < showingCards.Length; j++)
+                    {
+                        if (showingCards[j] == null)
+                            showingCards[j] = deck[i];
+                    }
+                }
+                else // Cartas que se tienen que adivinar
+                {
+                    for (int j = 0; j < ret.Length; j++)
+                    {
+                        if (ret[j] == null)
+                            ret[j] = deck[i];
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < showingCards.Length; i++)
+        {
+            float posX = (offsetX * i) + trans.position.x;
+            showingCards[i].transform.position = new Vector3(posX, trans.position.y, trans.position.z);
+        }
+
+        return ret;
+    }
+
     public void ShuffleDeck(Card[] deck) // Shuffles the deck by interchanging the cards position randomly in increased number
     {
         for (int i = 0; i < deck.Length - 1; i++)

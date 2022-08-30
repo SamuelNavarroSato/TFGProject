@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour
             case GameState.PHASE_C_P2:
                 HandlePhaseC_P2();
                 break;
+            case GameState.ENDGAME:
+                HandleEndgame();
+                break;
             default:
                 Debug.Log("Error");
                 break;
@@ -83,6 +86,11 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+    private void HandleEndgame()
+    {
+
+    }
 }
 
 public enum GameState
@@ -92,7 +100,8 @@ public enum GameState
     PHASE_B_P1,
     PHASE_B_P2,
     PHASE_C_P1,
-    PHASE_C_P2
+    PHASE_C_P2,
+    ENDGAME
 }
 
 public enum PlayerEnum
