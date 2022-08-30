@@ -66,17 +66,17 @@ public class GameManager : MonoBehaviour
 
     private void HandlePhaseB_P1()
     {
-        Debug.Log("B_P1");
+
     }
 
     private void HandlePhaseB_P2()
     {
-        Debug.Log("B_P2");
+
     }
 
     private void HandlePhaseC_P1()
     {
-        Debug.Log("C_P1");
+
     }
 
     private void HandlePhaseC_P2()

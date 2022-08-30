@@ -13,15 +13,16 @@ public class CameraManager : MonoBehaviour
     {
         if (currentState == GameState.PHASE_A_P1 || currentState == GameState.PHASE_A_P2)
         {
-            SetPosition(-52, 0);
+            SetPosition(0, 0);
+            //SetPosition(-52, 0);
         }
         else if (currentState == GameState.PHASE_B_P1 || currentState == GameState.PHASE_B_P2)
         {
-            SetPosition(0, 0);
+            //SetPosition(0, 0);
         }
         else if (currentState == GameState.PHASE_C_P1 || currentState == GameState.PHASE_C_P2)
         {
-            SetPosition(52, 0);
+            //SetPosition(52, 0);
         }
     }
 

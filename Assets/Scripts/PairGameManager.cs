@@ -43,10 +43,24 @@ public class PairGameManager : MonoBehaviour
     {
         if (foundPairs == cardManager.pairs)
         {
+            foundPairs = 0; // Reset the Game
+            CheckedPairs[0] = null;
+            CheckedPairs[1] = null;
+
+            for (int i = 0; i < currentDeck.Length; i++)
+            {
+                currentDeck[i].transform.position = new Vector3(100f, 100f, 100f);
+            }
+
+
             if (GameManager.Instance.state == GameState.PHASE_B_P1)
+            {
                 GameManager.Instance.UpdateGameState(GameState.PHASE_B_P2);
+            }
             else if (GameManager.Instance.state == GameState.PHASE_B_P2)
+            {
                 GameManager.Instance.UpdateGameState(GameState.PHASE_C_P1);
+            }
         }
     }
 
