@@ -62,14 +62,13 @@ public class MemoryGameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(guessDeck.Length);
             for (int i = 0; i < guessDeck.Length; i++)
             {
-                Debug.Log(word + "   " + guessDeck[i].value);
-
                 if (GetSimilarity(word, guessDeck[i].value) >= threshold)
                 {
+                    submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
                     StartCoroutine(FinishMemoryGame());
+                    break;
                 }
                 else
                 {
@@ -79,16 +78,30 @@ public class MemoryGameManager : MonoBehaviour
         }
     }
 
+    private void CleanUp(PlayerEnum player)
+    {
+        Card[] cleanUp = cardManager.RetrieveDeck(player);
+        for(int i = 0; i < cleanUp.Length; i++)
+        {
+            cleanUp[i].Hide();
+        }
+    }
+
     IEnumerator FinishMemoryGame()
     {
         yield return new WaitForSeconds(2);
 
         if (GameManager.Instance.state == GameState.PHASE_C_P1)
         {
+            CleanUp(PlayerEnum.PLAYER_2);
+
             GameManager.Instance.UpdateGameState(GameState.PHASE_C_P2);
         }
         else if (GameManager.Instance.state == GameState.PHASE_C_P2)
         {
+            CleanUp(PlayerEnum.PLAYER_1);
+
+            canvas.SetActive(false);
             GameManager.Instance.UpdateGameState(GameState.ENDGAME);
         }
     }
@@ -132,5 +145,4 @@ public class MemoryGameManager : MonoBehaviour
 
         return v1[target.Length];
     }
-
 }

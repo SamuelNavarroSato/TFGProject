@@ -64,7 +64,7 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < deck.Length; i++)
         {
             deck[i] = Instantiate(deck[i]);
-            deck[i].transform.position = new Vector3(100f, 100f, 100f);
+            deck[i].Hide();
         }
 
 

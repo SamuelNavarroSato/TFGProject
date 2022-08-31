@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     public CardManager cardManager;
+
+    public GameObject MenuCanvas;
 
     public GameState state;
 
@@ -89,7 +92,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleEndgame()
     {
+        MenuCanvas.SetActive(true);
+    }
 
+    public void OnVictory()
+    {
+        SceneManager.LoadScene(0);
     }
 }
 

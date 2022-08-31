@@ -87,6 +87,11 @@ public class Card : MonoBehaviour {
         textComponent.GetComponent<TMPro.TextMeshPro>().text = value;
     }
 
+    public void Hide()
+    {
+        transform.position = new Vector3(100f, 100f, 100f);
+    }
+
     public void Destroy()
     {
         DestroyImmediate(this, true);

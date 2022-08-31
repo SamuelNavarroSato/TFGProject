@@ -358,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardManager: {fileID: 26093949}
+  MenuCanvas: {fileID: 750806026}
   state: 0
 --- !u!114 &26093949
 MonoBehaviour:
@@ -1219,7 +1220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &543488566
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2432,8 +2433,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -3469,13 +3470,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 26093945}
-        m_TargetAssemblyTypeName: ButtonBehaviour, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+      - m_Target: {fileID: 26093948}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnVictory
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 317584323}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
