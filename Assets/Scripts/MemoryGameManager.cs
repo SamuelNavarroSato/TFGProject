@@ -31,7 +31,7 @@ public class MemoryGameManager : MonoBehaviour
         }
         else
         {
-            //canvas.SetActive(false);
+            canvas.SetActive(false);
         }
     }
 

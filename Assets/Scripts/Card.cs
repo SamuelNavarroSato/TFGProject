@@ -74,7 +74,7 @@ public class Card : MonoBehaviour {
         if (found)
         {
             isFound = true;
-            textComponent.GetComponent<TMPro.TextMeshPro>().color = Color.green;
+            textComponent.GetComponent<TMPro.TextMeshPro>().color = new Color32(50, 210, 50, 255);
         }
         else
         {
