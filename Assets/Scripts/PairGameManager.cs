@@ -47,20 +47,7 @@ public class PairGameManager : MonoBehaviour
             CheckedPairs[0] = null;
             CheckedPairs[1] = null;
 
-            for (int i = 0; i < currentDeck.Length; i++)
-            {
-                currentDeck[i].transform.position = new Vector3(100f, 100f, 100f);
-            }
-
-
-            if (GameManager.Instance.state == GameState.PHASE_B_P1)
-            {
-                GameManager.Instance.UpdateGameState(GameState.PHASE_B_P2);
-            }
-            else if (GameManager.Instance.state == GameState.PHASE_B_P2)
-            {
-                GameManager.Instance.UpdateGameState(GameState.PHASE_C_P1);
-            }
+            StartCoroutine(FinishPairGame());
         }
     }
 
@@ -126,5 +113,24 @@ public class PairGameManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    IEnumerator FinishPairGame()
+    {
+        yield return new WaitForSeconds(2);
+
+        for (int i = 0; i < currentDeck.Length; i++)
+        {
+            currentDeck[i].transform.position = new Vector3(100f, 100f, 100f);
+        }
+
+        if (GameManager.Instance.state == GameState.PHASE_B_P1)
+        {
+            GameManager.Instance.UpdateGameState(GameState.PHASE_B_P2);
+        }
+        else if (GameManager.Instance.state == GameState.PHASE_B_P2)
+        {
+            GameManager.Instance.UpdateGameState(GameState.PHASE_C_P1);
+        }
     }
 }

@@ -22,12 +22,12 @@ public class MemoryGameManager : MonoBehaviour
         if (currentState == GameState.PHASE_C_P1)
         {
             canvas.SetActive(true);
-            guessDeck = cardManager.SetupMemoryGame(cardManager.RetrieveDeck(PlayerEnum.PLAYER_2), originalPos);
+            guessDeck = cardManager.SetupMemoryGame(PlayerEnum.PLAYER_2, originalPos);
         }
         else if (currentState == GameState.PHASE_C_P2)
         {
             canvas.SetActive(true);
-            guessDeck = cardManager.SetupMemoryGame(cardManager.RetrieveDeck(PlayerEnum.PLAYER_1), originalPos);
+            guessDeck = cardManager.SetupMemoryGame(PlayerEnum.PLAYER_1, originalPos);
         }
         else
         {

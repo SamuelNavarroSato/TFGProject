@@ -141,8 +141,9 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public Card[] SetupMemoryGame(Card[] deck, Transform trans)
+    public Card[] SetupMemoryGame(PlayerEnum player, Transform trans)
     {
+        Card[] deck = RetrieveDeck(PlayerEnum.PLAYER_2);
         Vector3 startPos = trans.transform.position;
         Card[] showingCards = new Card[3];
         Card[] ret = new Card[3];
@@ -156,7 +157,10 @@ public class CardManager : MonoBehaviour
                     for (int j = 0; j < showingCards.Length; j++)
                     {
                         if (showingCards[j] == null)
+                        {
                             showingCards[j] = deck[i];
+                            break;
+                        }
                     }
                 }
                 else // Cartas que se tienen que adivinar
@@ -164,7 +168,10 @@ public class CardManager : MonoBehaviour
                     for (int j = 0; j < ret.Length; j++)
                     {
                         if (ret[j] == null)
+                        {
                             ret[j] = deck[i];
+                            break;
+                        }
                     }
                 }
             }
