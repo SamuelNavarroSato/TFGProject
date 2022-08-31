@@ -143,7 +143,7 @@ public class CardManager : MonoBehaviour
 
     public Card[] SetupMemoryGame(PlayerEnum player, Transform trans)
     {
-        Card[] deck = RetrieveDeck(PlayerEnum.PLAYER_2);
+        Card[] deck = RetrieveDeck(player);
         Vector3 startPos = trans.transform.position;
         Card[] showingCards = new Card[3];
         Card[] ret = new Card[3];
@@ -159,6 +159,7 @@ public class CardManager : MonoBehaviour
                         if (showingCards[j] == null)
                         {
                             showingCards[j] = deck[i];
+                            showingCards[j].textComponent.GetComponent<TMPro.TextMeshPro>().color = new Color32(60, 41, 41, 255);
                             break;
                         }
                     }

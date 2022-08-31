@@ -109,7 +109,6 @@ public class PairGameManager : MonoBehaviour
     {
         if (CheckedPairs[0].pair == CheckedPairs[1])
         {
-            Debug.Log("Cards are pair");
             return true;
         }
         return false;

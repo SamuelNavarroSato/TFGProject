@@ -31,7 +31,7 @@ public class MemoryGameManager : MonoBehaviour
         }
         else
         {
-            canvas.SetActive(false);
+            //canvas.SetActive(false);
         }
     }
 
@@ -62,18 +62,14 @@ public class MemoryGameManager : MonoBehaviour
         }
         else
         {
+            Debug.Log(guessDeck.Length);
             for (int i = 0; i < guessDeck.Length; i++)
             {
+                Debug.Log(word + "   " + guessDeck[i].value);
+
                 if (GetSimilarity(word, guessDeck[i].value) >= threshold)
                 {
-                    if (GameManager.Instance.state == GameState.PHASE_C_P1)
-                    {
-                        GameManager.Instance.UpdateGameState(GameState.PHASE_C_P2);
-                    }
-                    else if (GameManager.Instance.state == GameState.PHASE_C_P2)
-                    {
-                        GameManager.Instance.UpdateGameState(GameState.ENDGAME);
-                    }
+                    StartCoroutine(FinishMemoryGame());
                 }
                 else
                 {
@@ -82,6 +78,21 @@ public class MemoryGameManager : MonoBehaviour
             }
         }
     }
+
+    IEnumerator FinishMemoryGame()
+    {
+        yield return new WaitForSeconds(2);
+
+        if (GameManager.Instance.state == GameState.PHASE_C_P1)
+        {
+            GameManager.Instance.UpdateGameState(GameState.PHASE_C_P2);
+        }
+        else if (GameManager.Instance.state == GameState.PHASE_C_P2)
+        {
+            GameManager.Instance.UpdateGameState(GameState.ENDGAME);
+        }
+    }
+
     private float GetSimilarity(string source, string target)
     {
         if ((source == null) || (target == null)) return 0.0f;
