@@ -14,6 +14,7 @@ public class Card : MonoBehaviour {
     public bool main = false; // Only true if it has the keyword
     public bool isSelected = false;
     public bool isFound = false;
+    public bool wantsRotate = false;
 
     // Use this for initialization
     void Start()
@@ -34,7 +35,8 @@ public class Card : MonoBehaviour {
                 Flip(false);
         }
 
-        Rotate();
+        if (wantsRotate)
+            Rotate();
     }
 
     public void Flip(bool faceUp)

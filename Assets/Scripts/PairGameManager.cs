@@ -121,6 +121,7 @@ public class PairGameManager : MonoBehaviour
         for (int i = 0; i < currentDeck.Length; i++)
         {
             currentDeck[i].transform.position = new Vector3(100f, 100f, 100f);
+            currentDeck[i].wantsRotate = false;
         }
 
         if (GameManager.Instance.state == GameState.PHASE_B_P1)

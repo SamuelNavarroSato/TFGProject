@@ -70,11 +70,9 @@ public class MemoryGameManager : MonoBehaviour
                     StartCoroutine(FinishMemoryGame());
                     break;
                 }
-                else
-                {
-                    submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
-                }
             }
+
+            submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
         }
     }
 

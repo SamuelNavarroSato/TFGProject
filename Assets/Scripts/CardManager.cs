@@ -94,7 +94,7 @@ public class CardManager : MonoBehaviour
     {
         int rand = Random.Range(0, words.Length);
 
-        if (position <= 1)
+        if (position >= 1)
         {
             for (int j = 0; j < position - 1; j++)
             {
@@ -137,6 +137,7 @@ public class CardManager : MonoBehaviour
                 float posX = (offsetX * i) + original.position.x;
                 float posY = (offsetY * -j) + original.position.y;
                 deck[i + (j * 4)].transform.position = new Vector3(posX, posY, original.position.z);
+                deck[i + (j * 4)].wantsRotate = true;
             }
         }
     }
@@ -160,6 +161,7 @@ public class CardManager : MonoBehaviour
                         {
                             showingCards[j] = deck[i];
                             showingCards[j].textComponent.GetComponent<TMPro.TextMeshPro>().color = new Color32(60, 41, 41, 255);
+                            Debug.Log("Array 1  " + showingCards[j].value);
                             break;
                         }
                     }
@@ -171,6 +173,7 @@ public class CardManager : MonoBehaviour
                         if (ret[j] == null)
                         {
                             ret[j] = deck[i];
+                            Debug.Log("Array 2  " + ret[j].value);
                             break;
                         }
                     }
@@ -235,7 +238,7 @@ public class CardManager : MonoBehaviour
         words[10] = "SERIE";
         words[11] = "DIVERTIDO"; // Sentimientos
         words[12] = "PÁNICO";
-        words[13] = "SUSTO";
+        words[13] = "TRANSPARENTE";
         words[14] = "TRISTE";
         words[15] = "BUENO"; // Adjetivos
         words[16] = "FRÍO";
@@ -251,7 +254,7 @@ public class CardManager : MonoBehaviour
         words[26] = "REFRESCANTE";
         words[27] = "ALEGRE";
         words[28] = "PEQUEÑO";
-        words[29] = "EXTRAÑO";
+        words[29] = "DESTINO";
         words[30] = "ESPECIAL";
         words[31] = "SALVAJE";
         words[32] = "REDONDO";
