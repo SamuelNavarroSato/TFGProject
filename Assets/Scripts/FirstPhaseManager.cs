@@ -10,10 +10,6 @@ public class FirstPhaseManager : MonoBehaviour
 
     public GameObject counter;
     [SerializeField] public GameObject displayWord;
-    public GameObject inputWord;
-
-    public int[] positions;
-    public string[] words;
 
     private int current = 1;
     private bool updateDisplay = false;
@@ -28,12 +24,14 @@ public class FirstPhaseManager : MonoBehaviour
     {
         if (currentState == GameState.PHASE_A_P1)
         {
+            current = 1;
             wordGameCanvas.SetActive(true);
 
             Setup(PlayerEnum.PLAYER_1);
         }
         else if (currentState == GameState.PHASE_A_P2)
         {
+            current = 1;
             wordGameCanvas.SetActive(true);
 
             Setup(PlayerEnum.PLAYER_2);

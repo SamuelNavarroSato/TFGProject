@@ -21,6 +21,9 @@ public class UserInterfaceManager : MonoBehaviour
     public GameObject bothPhaseC;
 
     public GameObject resultsScreen;
+    public GameObject redResult;
+    public GameObject blueResult;
+    public GameObject playerText;
 
     public GameObject blueBackground;
     public GameObject redBackground;
@@ -56,7 +59,6 @@ public class UserInterfaceManager : MonoBehaviour
             bluePhaseA.SetActive(true);
 
             SetBackground(PlayerEnum.PLAYER_2);
-
         }
         else if (currentState == GameState.PHASE_B_P1)
         {
@@ -83,6 +85,8 @@ public class UserInterfaceManager : MonoBehaviour
         else if (currentState == GameState.ENDGAME)
         {
             resultsScreen.SetActive(true);
+
+            SetResults();
         }
     }
     
@@ -131,6 +135,27 @@ public class UserInterfaceManager : MonoBehaviour
         canvas.SetActive(false);
     }
 
+    private void SetResults()
+    {
+        int redScore = GameManager.Instance.player1.score;
+        int blueScore = GameManager.Instance.player2.score;
+
+        redResult.GetComponent<TMPro.TextMeshProUGUI>().text = redScore.ToString();
+        blueResult.GetComponent<TMPro.TextMeshProUGUI>().text = blueScore.ToString();
+
+        if (redScore > blueScore)
+        {
+            playerText.GetComponent<TMPro.TextMeshProUGUI>().text = "JUGADOR ROJO";
+        }
+        else if (blueScore > redScore)
+        {
+            playerText.GetComponent<TMPro.TextMeshProUGUI>().text = "JUGADOR AZUL";
+        }
+        else if (redScore == blueScore)
+        {
+            playerText.GetComponent<TMPro.TextMeshProUGUI>().text = "NADIE";
+        }
+    }
 
     void Start()
     {

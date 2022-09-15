@@ -10,7 +10,7 @@ public class ThirdPhaseManager : MonoBehaviour
     public Transform redPosition;
     public Transform bluePosition;
 
-    public const int winnerPrize = 10;
+    public const int winnerPrize = 6;
     public const float threshold = 0.8f;
 
     void Awake()

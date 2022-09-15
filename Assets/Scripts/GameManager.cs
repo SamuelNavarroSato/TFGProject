@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
     public void GoNextPhase()
     {
         UpdateGameState(state + 1);
