@@ -227,7 +227,7 @@ public class CardManager : MonoBehaviour
         words[10] = "SERIE";
         words[11] = "DIVERTIDO"; // Sentimientos
         words[12] = "PÁNICO";
-        words[13] = "TRANSPARENTE";
+        words[13] = "HAMBRE";
         words[14] = "TRISTE";
         words[15] = "BUENO"; // Adjetivos
         words[16] = "FRÍO";
@@ -240,10 +240,10 @@ public class CardManager : MonoBehaviour
         words[23] = "DULCE";
         words[24] = "SALADO";
         words[25] = "GRANDE";
-        words[26] = "REFRESCANTE";
+        words[26] = "SUAVE";
         words[27] = "ALEGRE";
         words[28] = "PEQUEÑO";
-        words[29] = "DESTINO";
+        words[29] = "RUGOSO";
         words[30] = "ESPECIAL";
         words[31] = "SALVAJE";
         words[32] = "REDONDO";
