@@ -130,7 +130,7 @@ public class PairGameManager : MonoBehaviour
         }
         else if (GameManager.Instance.state == GameState.PHASE_B_P2)
         {
-            GameManager.Instance.UpdateGameState(GameState.PHASE_C_P1);
+            GameManager.Instance.UpdateGameState(GameState.PHASE_C);
         }
     }
 }

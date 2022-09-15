@@ -86,8 +86,6 @@ public class CardManager : MonoBehaviour
             deck[i + pairs].Setup("", false); // Other card of the pair, being the one which has to be edited
             deck[i + pairs].SetPair(deck[i]);
         }
-
-        rnd = null;
     }
 
     private int RecursiveRandom(int[] array, int position)

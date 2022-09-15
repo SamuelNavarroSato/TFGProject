@@ -43,11 +43,8 @@ public class GameManager : MonoBehaviour
             case GameState.PHASE_B_P2:
                 HandlePhaseB_P2();
                 break;
-            case GameState.PHASE_C_P1:
-                HandlePhaseC_P1();
-                break;
-            case GameState.PHASE_C_P2:
-                HandlePhaseC_P2();
+            case GameState.PHASE_C:
+                HandlePhaseC();
                 break;
             case GameState.ENDGAME:
                 HandleEndgame();
@@ -80,12 +77,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void HandlePhaseC_P1()
-    {
-
-    }
-
-    private void HandlePhaseC_P2()
+    private void HandlePhaseC()
     {
 
     }
@@ -107,13 +99,13 @@ public enum GameState
     PHASE_A_P2,
     PHASE_B_P1,
     PHASE_B_P2,
-    PHASE_C_P1,
-    PHASE_C_P2,
+    PHASE_C,
     ENDGAME
 }
 
 public enum PlayerEnum
 {
     PLAYER_1,
-    PLAYER_2
+    PLAYER_2,
+    DEFAULT
 }

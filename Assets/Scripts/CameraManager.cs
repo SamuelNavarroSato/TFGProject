@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
         {
 
         }
-        else if (currentState == GameState.PHASE_C_P1 || currentState == GameState.PHASE_C_P2)
+        else if (currentState == GameState.PHASE_C)
         {
 
         }

@@ -19,15 +19,10 @@ public class MemoryGameManager : MonoBehaviour
 
     private void WhenGameStateChanges(GameState currentState)
     {
-        if (currentState == GameState.PHASE_C_P1)
+        if (currentState == GameState.PHASE_C)
         {
             canvas.SetActive(true);
             guessDeck = cardManager.SetupMemoryGame(PlayerEnum.PLAYER_2, originalPos);
-        }
-        else if (currentState == GameState.PHASE_C_P2)
-        {
-            canvas.SetActive(true);
-            guessDeck = cardManager.SetupMemoryGame(PlayerEnum.PLAYER_1, originalPos);
         }
         else
         {
@@ -52,7 +47,7 @@ public class MemoryGameManager : MonoBehaviour
         
     }
 
-    public void MemorySubmission(GameObject submittedTextGO)
+    /*public void MemorySubmission(GameObject submittedTextGO)
     {
         string word = submittedTextGO.GetComponent<TMPro.TMP_InputField>().text;
 
@@ -74,7 +69,7 @@ public class MemoryGameManager : MonoBehaviour
 
             submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
         }
-    }
+    }*/
 
     private void CleanUp(PlayerEnum player)
     {
@@ -89,17 +84,10 @@ public class MemoryGameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        if (GameManager.Instance.state == GameState.PHASE_C_P1)
+        if (GameManager.Instance.state == GameState.PHASE_C)
         {
             CleanUp(PlayerEnum.PLAYER_2);
 
-            GameManager.Instance.UpdateGameState(GameState.PHASE_C_P2);
-        }
-        else if (GameManager.Instance.state == GameState.PHASE_C_P2)
-        {
-            CleanUp(PlayerEnum.PLAYER_1);
-
-            canvas.SetActive(false);
             GameManager.Instance.UpdateGameState(GameState.ENDGAME);
         }
     }
