@@ -10,6 +10,9 @@ public class SecondPhaseManager : MonoBehaviour
     public Card[] CheckedPairs;
 
     public int foundPairs = 0;
+    public const int maximumScore = 30;
+    public const int penalizationScore = 1;
+    public int currentScore;
 
     void Awake()
     {
@@ -20,10 +23,12 @@ public class SecondPhaseManager : MonoBehaviour
     {
         if (currentState == GameState.PHASE_B_P1)
         {
+            currentScore = maximumScore;
             currentDeck = cardManager.RetrieveDeck(PlayerEnum.PLAYER_2);
         }
         else if (currentState == GameState.PHASE_B_P2)
         {
+            currentScore = maximumScore;
             currentDeck = cardManager.RetrieveDeck(PlayerEnum.PLAYER_1);
         }
         else
@@ -48,6 +53,12 @@ public class SecondPhaseManager : MonoBehaviour
             CheckedPairs[0] = null;
             CheckedPairs[1] = null;
 
+            // Awards points
+            if (GameManager.Instance.state == GameState.PHASE_B_P1)
+                GameManager.Instance.ModifyScore(PlayerEnum.PLAYER_1, currentScore);
+            else if (GameManager.Instance.state == GameState.PHASE_B_P2)
+                GameManager.Instance.ModifyScore(PlayerEnum.PLAYER_2, currentScore);
+
             StartCoroutine(FinishPhase());
         }
     }
@@ -58,13 +69,13 @@ public class SecondPhaseManager : MonoBehaviour
         {
             if (card != CheckedPairs[0] && card != CheckedPairs[1])
             {
-                if (CheckedPairs[0] == null) // 1st Pick: Array is empty
+                if (CheckedPairs[0] == null) // 1st Card picked: Array is empty
                 {
                     CheckedPairs[0] = card;
                     CheckedPairs[0].isSelected = true;
                     return;
                 }
-                else if (CheckedPairs[1] == null) // 2nd Pick and every 2 picks, then it should check below
+                else if (CheckedPairs[1] == null) // 2nd Card picked and every 2 picks, then it should check below
                 {
                     CheckedPairs[1] = card;
                     CheckedPairs[1].isSelected = true;
@@ -90,6 +101,10 @@ public class SecondPhaseManager : MonoBehaviour
 
                     foundPairs++;
                 }
+                else
+                {
+                    SubstractScore();
+                }
             }
             else if (card == CheckedPairs[0] && CheckedPairs[1] != null)
             {
@@ -104,6 +119,12 @@ public class SecondPhaseManager : MonoBehaviour
                 CheckedPairs[0] = card;
             }
         }
+    }
+
+    private void SubstractScore()
+    {
+        if (currentScore > 0)
+            currentScore -= penalizationScore;
     }
 
     private bool IsItPairs()

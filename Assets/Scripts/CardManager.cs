@@ -258,7 +258,7 @@ public class CardManager : MonoBehaviour
         words[41] = "GAFAS";
         words[42] = "NAVIDAD";
         words[43] = "CUMPLEAÑOS";
-        words[44] = "FAMOS@";
+        words[44] = "SUDOR";
         words[45] = "JUEGO";
         words[46] = "MEDIANOCHE";
         words[47] = "REGALO";
