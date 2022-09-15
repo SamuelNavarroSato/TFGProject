@@ -36,11 +36,11 @@ public class CardManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_B_P1)
         {
-            SetupPairGame(RetrieveDeck(PlayerEnum.PLAYER_2)); // Player 1 has Player 2's deck on display
+            SetupPhaseB(RetrieveDeck(PlayerEnum.PLAYER_2)); // Player 1 has Player 2's deck on display
         }
         else if (currentState == GameState.PHASE_B_P2)
         {
-            SetupPairGame(RetrieveDeck(PlayerEnum.PLAYER_1));
+            SetupPhaseB(RetrieveDeck(PlayerEnum.PLAYER_1));
         }
     }
     
@@ -114,15 +114,19 @@ public class CardManager : MonoBehaviour
         {
             ret = player1.deck;
         }
-        else
+        else if (player == PlayerEnum.PLAYER_2)
         {
             ret = player2.deck;
+        }
+        else // default
+        {
+            ret = new Card[0];
         }
 
         return ret;
     }
 
-    private void SetupPairGame(Card[] deck)
+    private void SetupPhaseB(Card[] deck)
     {
         Vector3 startPos = original.transform.position;
         
@@ -140,52 +144,24 @@ public class CardManager : MonoBehaviour
         }
     }
 
-    public Card[] SetupMemoryGame(PlayerEnum player, Transform trans)
+    public void SetupPhaseC(PlayerEnum player, Transform trans)
     {
         Card[] deck = RetrieveDeck(player);
         Vector3 startPos = trans.transform.position;
-        Card[] showingCards = new Card[3];
-        Card[] ret = new Card[3];
+
+        ShuffleDeck(deck);
 
         for (int i = 0; i < deck.Length; i++)
         {
-            if (deck[i].main == false)
+            if (deck[i].main == true) // Find the first Main Card to show on top
             {
-                if (showingCards[2] == null) // Cartas que se enseñan
-                {
-                    for (int j = 0; j < showingCards.Length; j++)
-                    {
-                        if (showingCards[j] == null)
-                        {
-                            showingCards[j] = deck[i];
-                            showingCards[j].textComponent.GetComponent<TMPro.TextMeshPro>().color = new Color32(60, 41, 41, 255);
-                            Debug.Log("Array 1  " + showingCards[j].value);
-                            break;
-                        }
-                    }
-                }
-                else // Cartas que se tienen que adivinar
-                {
-                    for (int j = 0; j < ret.Length; j++)
-                    {
-                        if (ret[j] == null)
-                        {
-                            ret[j] = deck[i];
-                            Debug.Log("Array 2  " + ret[j].value);
-                            break;
-                        }
-                    }
-                }
+                // Set Main Card
+                deck[i].transform.position = new Vector3(trans.position.x, trans.position.y, trans.position.z);
+                
+                // Set Main Card's position
+                deck[i].pair.transform.position = new Vector3(trans.position.x, trans.position.y + offsetY, trans.position.z);
             }
         }
-
-        for (int i = 0; i < showingCards.Length; i++)
-        {
-            float posX = (offsetX * i) + trans.position.x;
-            showingCards[i].transform.position = new Vector3(posX, trans.position.y, trans.position.z);
-        }
-
-        return ret;
     }
 
     public void ShuffleDeck(Card[] deck) // Shuffles the deck by interchanging the cards position randomly in increased number

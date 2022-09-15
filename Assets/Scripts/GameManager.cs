@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     public GameState state;
 
+    [SerializeField] public PlayerManager player1;
+    [SerializeField] public PlayerManager player2;
+
     public static event Action<GameState> OnGameStateChanged;
 
     void Awake()
@@ -56,6 +59,17 @@ public class GameManager : MonoBehaviour
         }
         OnGameStateChanged?.Invoke(newState);
     }
+    public void ModifyScore(PlayerEnum player, int score)
+    {
+        if (player == PlayerEnum.PLAYER_1)
+        {
+            player1.IncreaseScore(score);
+        }
+        else if (player == PlayerEnum.PLAYER_2)
+        {
+            player2.IncreaseScore(score);
+        }
+    }
 
     private void HandlePhaseA_P1()
     {
@@ -85,6 +99,10 @@ public class GameManager : MonoBehaviour
     private void HandleEndgame()
     {
         MenuCanvas.SetActive(true);
+    }
+    public void GoNextPhase()
+    {
+        UpdateGameState(state + 1);
     }
 
     public void OnVictory()

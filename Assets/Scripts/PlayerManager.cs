@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public int score;
+    public int score = 0;
 
     public Card[] deck;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void IncreaseScore(int sum)
+    {
+        score += sum;
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UserInterfaceManager : MonoBehaviour
 {
+    public static UserInterfaceManager Instance;
+
     public GameObject instructionsGO;
 
     public GameObject redCurtain;
@@ -25,14 +27,17 @@ public class UserInterfaceManager : MonoBehaviour
     void Awake()
     {
         GameManager.OnGameStateChanged += WhenGameStateChanges;
+
+        Instance = this;
     }
 
     private void WhenGameStateChanges(GameState currentState)
     {
-        if (currentState == GameState.PHASE_A_P1)
-        {
+        if (currentState != GameState.ENDGAME)
             instructionsGO.SetActive(true);
 
+        if (currentState == GameState.PHASE_A_P1)
+        {
             redPhaseA.SetActive(true);
             redPhaseB.SetActive(false);
             bluePhaseA.SetActive(false);
@@ -43,8 +48,6 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_A_P2)
         {
-            instructionsGO.SetActive(true);
-
             redPhaseA.SetActive(false);
             bluePhaseA.SetActive(true);
 
@@ -53,8 +56,6 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_B_P1)
         {
-            instructionsGO.SetActive(true);
-
             bluePhaseA.SetActive(false);
             redPhaseB.SetActive(true);
 
@@ -62,8 +63,6 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_B_P2)
         {
-            instructionsGO.SetActive(true);
-
             redPhaseB.SetActive(false);
             bluePhaseB.SetActive(true);
 
@@ -71,8 +70,6 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_C)
         {
-            instructionsGO.SetActive(true);
-
             bluePhaseB.SetActive(false);
             bothPhaseC.SetActive(true);
 
@@ -118,6 +115,13 @@ public class UserInterfaceManager : MonoBehaviour
                 break;
         }
     }
+
+    // Functionality for Buttons
+    public void ButtonDeactivateCanvas(GameObject canvas)
+    {
+        canvas.SetActive(false);
+    }
+
 
     void Start()
     {
