@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThirdPhaseManager : MonoBehaviour
 {
-    [SerializeField] public CardManager cardManager;
+    private CardManager cardManager;
 
     public GameObject canvas;
     public Transform redPosition;
@@ -35,7 +35,7 @@ public class ThirdPhaseManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        cardManager = CardManager.Instance;
     }
 
     // Update is called once per frame
@@ -52,9 +52,11 @@ public class ThirdPhaseManager : MonoBehaviour
     private void CleanUp()
     {
         Card[] cleanUp = cardManager.RetrieveDeck(PlayerEnum.PLAYER_1);
-        for(int i = 0; i < cleanUp.Length; i++)
+        Card[] cleanUp2 = cardManager.RetrieveDeck(PlayerEnum.PLAYER_2);
+        for (int i = 0; i < cleanUp.Length; i++)
         {
             cleanUp[i].Hide();
+            cleanUp2[i].Hide();
         }
     }
 
@@ -66,7 +68,7 @@ public class ThirdPhaseManager : MonoBehaviour
         {
             CleanUp();
 
-            GameManager.Instance.UpdateGameState(GameState.ENDGAME);
+            GameManager.Instance.GoNextPhase();
         }
     }
 
@@ -80,6 +82,6 @@ public class ThirdPhaseManager : MonoBehaviour
     public void SetWinner(PlayerEnum player)
     {
         GameManager.Instance.ModifyScore(player, winnerPrize);
-        GameManager.Instance.GoNextPhase();
+        StartCoroutine(FinishMemoryGame());
     }
 }

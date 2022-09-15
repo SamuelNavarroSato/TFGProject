@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PairGameManager : MonoBehaviour
+public class SecondPhaseManager : MonoBehaviour
 {
-    [SerializeField] public CardManager cardManager;
+    private CardManager cardManager;
 
     public Card[] currentDeck;
     public Card[] CheckedPairs;
@@ -35,6 +35,7 @@ public class PairGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cardManager = CardManager.Instance;
         CheckedPairs = new Card[2];
     }
 
@@ -47,7 +48,7 @@ public class PairGameManager : MonoBehaviour
             CheckedPairs[0] = null;
             CheckedPairs[1] = null;
 
-            StartCoroutine(FinishPairGame());
+            StartCoroutine(FinishPhase());
         }
     }
 
@@ -114,7 +115,7 @@ public class PairGameManager : MonoBehaviour
         return false;
     }
 
-    IEnumerator FinishPairGame()
+    IEnumerator FinishPhase()
     {
         yield return new WaitForSeconds(2);
 
@@ -124,13 +125,6 @@ public class PairGameManager : MonoBehaviour
             currentDeck[i].wantsRotate = false;
         }
 
-        if (GameManager.Instance.state == GameState.PHASE_B_P1)
-        {
-            GameManager.Instance.UpdateGameState(GameState.PHASE_B_P2);
-        }
-        else if (GameManager.Instance.state == GameState.PHASE_B_P2)
-        {
-            GameManager.Instance.UpdateGameState(GameState.PHASE_C);
-        }
+        GameManager.Instance.GoNextPhase();
     }
 }

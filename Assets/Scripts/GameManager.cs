@@ -7,10 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public CardManager cardManager;
-
-    public GameObject MenuCanvas;
-
     public GameState state;
 
     [SerializeField] public PlayerManager player1;
@@ -98,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleEndgame()
     {
-        MenuCanvas.SetActive(true);
+
     }
     public void GoNextPhase()
     {

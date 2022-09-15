@@ -20,6 +20,8 @@ public class UserInterfaceManager : MonoBehaviour
 
     public GameObject bothPhaseC;
 
+    public GameObject resultsScreen;
+
     public GameObject blueBackground;
     public GameObject redBackground;
     public GameObject bothBackground;
@@ -38,6 +40,8 @@ public class UserInterfaceManager : MonoBehaviour
 
         if (currentState == GameState.PHASE_A_P1)
         {
+            resultsScreen.SetActive(false);
+
             redPhaseA.SetActive(true);
             redPhaseB.SetActive(false);
             bluePhaseA.SetActive(false);
@@ -74,6 +78,11 @@ public class UserInterfaceManager : MonoBehaviour
             bothPhaseC.SetActive(true);
 
             SetBackground(PlayerEnum.DEFAULT);
+        }
+
+        else if (currentState == GameState.ENDGAME)
+        {
+            resultsScreen.SetActive(true);
         }
     }
     

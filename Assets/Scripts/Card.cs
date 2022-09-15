@@ -55,7 +55,7 @@ public class Card : MonoBehaviour {
 
     private void OnMouseUp()
     {
-        GameObject.FindGameObjectWithTag("PairGame").GetComponent<PairGameManager>().Check(this);
+        GameObject.FindGameObjectWithTag("PairGame").GetComponent<SecondPhaseManager>().Check(this);
     }
 
     public void Setup(string value, bool main)

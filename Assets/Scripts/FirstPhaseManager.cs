@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WordGameManager : MonoBehaviour
+public class FirstPhaseManager : MonoBehaviour
 {
     [SerializeField] public GameObject wordGameCanvas;
 
-    [SerializeField] public CardManager cardManager;
+    private CardManager cardManager;
 
     public GameObject counter;
     [SerializeField] public GameObject displayWord;
@@ -46,7 +46,7 @@ public class WordGameManager : MonoBehaviour
 
     void Start()
     {
-        
+        cardManager = CardManager.Instance;
     }
 
     void Update()
@@ -55,16 +55,8 @@ public class WordGameManager : MonoBehaviour
         {
             if (current > cardManager.pairs)
             {
-                if (GameManager.Instance.state == GameState.PHASE_A_P1)
-                {
-                    current = 1;
-                    GameManager.Instance.UpdateGameState(GameState.PHASE_A_P2);
-                }
-                else if (GameManager.Instance.state == GameState.PHASE_A_P2)
-                {
-                    current = 1;
-                    GameManager.Instance.UpdateGameState(GameState.PHASE_B_P1);
-                }
+                current = 1;
+                GameManager.Instance.GoNextPhase();
             }
         }
     }

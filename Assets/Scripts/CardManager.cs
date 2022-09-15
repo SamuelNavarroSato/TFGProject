@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CardManager : MonoBehaviour
 {
+    public static CardManager Instance;
+
     public const int cardColumns = 4;
     public const int cardRows = 3;
     public const float offsetX = 5f;
@@ -19,6 +21,8 @@ public class CardManager : MonoBehaviour
 
     void Awake()
     {
+        Instance = this;
+
         GameManager.OnGameStateChanged += WhenGameStateChanges;
 
         LoadWords();
@@ -149,6 +153,13 @@ public class CardManager : MonoBehaviour
         Card[] deck = RetrieveDeck(player);
         Vector3 startPos = trans.transform.position;
 
+        Color32 color = Color.black;
+
+        if (player == PlayerEnum.PLAYER_1) // RED
+            color = new Color32(191, 30, 19, 255);
+        else if (player == PlayerEnum.PLAYER_2) // BLUE
+            color = new Color32(0, 94, 190, 255);
+
         ShuffleDeck(deck);
 
         for (int i = 0; i < deck.Length; i++)
@@ -157,9 +168,13 @@ public class CardManager : MonoBehaviour
             {
                 // Set Main Card
                 deck[i].transform.position = new Vector3(trans.position.x, trans.position.y, trans.position.z);
-                
-                // Set Main Card's position
-                deck[i].pair.transform.position = new Vector3(trans.position.x, trans.position.y + offsetY, trans.position.z);
+                deck[i].textComponent.GetComponent<TMPro.TextMeshPro>().color = color;
+
+                // Set Main Card's Pair position
+                deck[i].pair.transform.position = new Vector3(trans.position.x * 0.7f, trans.position.y - (offsetY * 0.6f), trans.position.z - 1);
+                deck[i].pair.textComponent.GetComponent<TMPro.TextMeshPro>().color = color;
+
+                break;
             }
         }
     }
