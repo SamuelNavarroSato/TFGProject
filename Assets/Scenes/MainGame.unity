@@ -440,7 +440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wordGameCanvas: {fileID: 563870246}
-  cardManager: {fileID: 26093949}
   counter: {fileID: 1252991352}
   displayWord: {fileID: 1033492817}
 --- !u!1 &26093945
@@ -1188,7 +1187,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ACEPTAR
+  m_text: SALIR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 332ddfd843536aa46b4324a161c16eaa, type: 2}
   m_sharedMaterial: {fileID: -7521727232507040524, guid: 332ddfd843536aa46b4324a161c16eaa, type: 2}
@@ -3151,11 +3150,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026994, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026994, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026994, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4623,7 +4622,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659d482ffab120f4b914703249900ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardManager: {fileID: 26093949}
   canvas: {fileID: 543488565}
   redPosition: {fileID: 1371013794}
   bluePosition: {fileID: 1826908633}
@@ -5595,11 +5593,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026994, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026994, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026994, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5778,7 +5776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fddffb4b789582418ea6ebf038c75f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardManager: {fileID: 26093949}
   currentDeck: []
   CheckedPairs: []
   foundPairs: 0

@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     public void OnVictory()
     {
-        SceneManager.LoadScene(0);
+        Application.Quit();
     }
 }
 
