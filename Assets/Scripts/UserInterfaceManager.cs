@@ -29,6 +29,9 @@ public class UserInterfaceManager : MonoBehaviour
     public GameObject redBackground;
     public GameObject bothBackground;
 
+    public ParticleSystem redSpark;
+    public ParticleSystem blueSpark;
+
     void Awake()
     {
         GameManager.OnGameStateChanged += WhenGameStateChanges;
@@ -158,10 +161,12 @@ public class UserInterfaceManager : MonoBehaviour
         if (redScore > blueScore)
         {
             playerText.GetComponent<TMPro.TextMeshProUGUI>().text = "JUGADOR ROJO";
+            redSpark.Play();
         }
         else if (blueScore > redScore)
         {
             playerText.GetComponent<TMPro.TextMeshProUGUI>().text = "JUGADOR AZUL";
+            blueSpark.Play();
         }
         else if (redScore == blueScore)
         {

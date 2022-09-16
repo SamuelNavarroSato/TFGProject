@@ -17,6 +17,8 @@ public class Card : MonoBehaviour {
     public bool isFound = false;
     public bool wantsRotate = false;
 
+    public byte[] c = new byte[4]; // Color
+
     // Use this for initialization
     void Start()
     {
@@ -77,7 +79,7 @@ public class Card : MonoBehaviour {
         if (found)
         {
             isFound = true;
-            textComponent.GetComponent<TMPro.TextMeshPro>().color = new Color32(50, 210, 50, 255);
+            textComponent.GetComponent<TMPro.TextMeshPro>().color = new Color32(c[0], c[1], c[2], c[3]);
         }
         else
         {

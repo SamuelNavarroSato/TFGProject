@@ -9,6 +9,8 @@ public class ThirdPhaseManager : MonoBehaviour
     public GameObject canvas;
     public Transform redPosition;
     public Transform bluePosition;
+    public ParticleSystem redSparkles;
+    public ParticleSystem blueSparkles;
 
     public const int winnerPrize = 6;
     public const float threshold = 0.8f;
@@ -75,9 +77,15 @@ public class ThirdPhaseManager : MonoBehaviour
     public void ButtonSelectWinner(int winner)
     {
         if (winner == 1)
+        {
+            redSparkles.Play();
             SetWinner(PlayerEnum.PLAYER_1);
+        }
         else if (winner == 2)
+        {
+            blueSparkles.Play();
             SetWinner(PlayerEnum.PLAYER_2);
+        }
     }
     public void SetWinner(PlayerEnum player)
     {

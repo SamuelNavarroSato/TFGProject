@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6335686766675740503, guid: 5564a92767333de4886b21437d982918, type: 2}
+  - {fileID: -7521727232507040524, guid: 332ddfd843536aa46b4324a161c16eaa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,8 +102,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: FRUTA
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5564a92767333de4886b21437d982918, type: 2}
-  m_sharedMaterial: {fileID: -6335686766675740503, guid: 5564a92767333de4886b21437d982918, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 332ddfd843536aa46b4324a161c16eaa, type: 2}
+  m_sharedMaterial: {fileID: -7521727232507040524, guid: 332ddfd843536aa46b4324a161c16eaa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 40
   m_fontSizeMax: 110
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -229,6 +229,7 @@ MonoBehaviour:
   isSelected: 0
   isFound: 0
   wantsRotate: 0
+  c: bf1e13ff
 --- !u!61 &3662995791698395240
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -484,15 +485,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026995, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
-      value: 0.07450981
+      value: 0.0990566
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026995, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.g
-      value: 0.11764706
+      value: 0.15667507
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026995, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.r
-      value: 0.7490196
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9963e42a209201f4c8a0a17f7f0350be, type: 3}
