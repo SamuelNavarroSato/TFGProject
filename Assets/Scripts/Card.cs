@@ -6,6 +6,7 @@ public class Card : MonoBehaviour {
     private Quaternion desiredRotation;
 
     [SerializeField] public GameObject textComponent;
+    public ParticleSystem sparkles;
 
     public string value = "";
 
@@ -92,6 +93,11 @@ public class Card : MonoBehaviour {
     public void Hide()
     {
         transform.position = new Vector3(100f, 100f, 100f);
+    }
+
+    public void SparkleIt()
+    {
+        sparkles.Play();
     }
 
     public void Destroy()

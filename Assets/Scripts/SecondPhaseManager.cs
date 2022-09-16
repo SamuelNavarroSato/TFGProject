@@ -97,6 +97,9 @@ public class SecondPhaseManager : MonoBehaviour
                 {
                     AudioManager.Instance.PlaySound(3);
 
+                    CheckedPairs[1].SparkleIt();
+                    CheckedPairs[0].SparkleIt();
+
                     CheckedPairs[1].SetFound(true);
                     CheckedPairs[0].SetFound(true);
 
