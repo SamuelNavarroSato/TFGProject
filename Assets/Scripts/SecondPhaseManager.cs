@@ -82,6 +82,8 @@ public class SecondPhaseManager : MonoBehaviour
                 }
                 else // Every 3rd pick, new pair
                 {
+                    AudioManager.Instance.PlaySound(2);
+
                     CheckedPairs[0].isSelected = false;
                     CheckedPairs[1].isSelected = false;
                     CheckedPairs[1] = null;
@@ -93,6 +95,8 @@ public class SecondPhaseManager : MonoBehaviour
 
                 if (IsItPairs())
                 {
+                    AudioManager.Instance.PlaySound(3);
+
                     CheckedPairs[1].SetFound(true);
                     CheckedPairs[0].SetFound(true);
 
@@ -103,6 +107,8 @@ public class SecondPhaseManager : MonoBehaviour
                 }
                 else
                 {
+                    AudioManager.Instance.PlaySound(2);
+
                     SubstractScore();
                 }
             }

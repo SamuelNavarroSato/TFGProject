@@ -100,6 +100,11 @@ public class FirstPhaseManager : MonoBehaviour
             submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
 
             ++current;
+            
+            if (current <= 6)
+            {
+                AudioManager.Instance.PlaySound(2);
+            }
 
             updateDisplay = true;
         }

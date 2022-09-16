@@ -43,6 +43,8 @@ public class UserInterfaceManager : MonoBehaviour
 
         if (currentState == GameState.PHASE_A_P1)
         {
+            AudioManager.Instance.PlaySound(5);
+
             resultsScreen.SetActive(false);
 
             redPhaseA.SetActive(true);
@@ -55,6 +57,8 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_A_P2)
         {
+            AudioManager.Instance.PlaySound(5);
+
             redPhaseA.SetActive(false);
             bluePhaseA.SetActive(true);
 
@@ -62,6 +66,8 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_B_P1)
         {
+            AudioManager.Instance.PlaySound(5);
+
             bluePhaseA.SetActive(false);
             redPhaseB.SetActive(true);
 
@@ -69,6 +75,8 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_B_P2)
         {
+            AudioManager.Instance.PlaySound(5);
+
             redPhaseB.SetActive(false);
             bluePhaseB.SetActive(true);
 
@@ -76,6 +84,8 @@ public class UserInterfaceManager : MonoBehaviour
         }
         else if (currentState == GameState.PHASE_C)
         {
+            AudioManager.Instance.PlaySound(5);
+
             bluePhaseB.SetActive(false);
             bothPhaseC.SetActive(true);
 
@@ -84,6 +94,8 @@ public class UserInterfaceManager : MonoBehaviour
 
         else if (currentState == GameState.ENDGAME)
         {
+            AudioManager.Instance.PlaySound(6);
+
             resultsScreen.SetActive(true);
 
             SetResults();
