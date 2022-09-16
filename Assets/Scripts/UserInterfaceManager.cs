@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UserInterfaceManager : MonoBehaviour
 {
-    public static UserInterfaceManager Instance;
 
     public GameObject instructionsGO;
 
@@ -20,6 +19,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     public GameObject bothPhaseC;
 
+    public GameObject resultButton;
     public GameObject resultsScreen;
     public GameObject redResult;
     public GameObject blueResult;
@@ -35,8 +35,6 @@ public class UserInterfaceManager : MonoBehaviour
     void Awake()
     {
         GameManager.OnGameStateChanged += WhenGameStateChanges;
-
-        Instance = this;
     }
 
     private void WhenGameStateChanges(GameState currentState)
@@ -48,6 +46,7 @@ public class UserInterfaceManager : MonoBehaviour
         {
             AudioManager.Instance.PlaySound(5);
 
+            resultButton.SetActive(false);
             resultsScreen.SetActive(false);
 
             redPhaseA.SetActive(true);
@@ -99,6 +98,7 @@ public class UserInterfaceManager : MonoBehaviour
         {
             AudioManager.Instance.PlaySound(6);
 
+            resultButton.SetActive(true);
             resultsScreen.SetActive(true);
 
             SetResults();

@@ -56,7 +56,7 @@ public class Card : MonoBehaviour {
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, Time.deltaTime * scalingFactor);
     }
 
-    private void OnMouseUp()
+    private void OnMouseDown()
     {
         GameObject.FindGameObjectWithTag("PairGame").GetComponent<SecondPhaseManager>().Check(this);
     }
