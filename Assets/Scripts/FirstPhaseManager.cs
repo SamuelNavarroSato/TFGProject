@@ -103,7 +103,7 @@ public class FirstPhaseManager : MonoBehaviour
             
             if (current <= 6)
             {
-                AudioManager.Instance.PlaySound(2);
+                AudioManager.Instance.PlaySound(1);
             }
 
             updateDisplay = true;

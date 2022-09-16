@@ -3565,11 +3565,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UIButtonSound: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
   UIInputSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  cardFlipSound: {fileID: 8300000, guid: 0994c12e202f342459a4212e7287f7e8, type: 3}
-  cardCorrectSound: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
-  phaseEndSound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  cardFlipSound: {fileID: 8300000, guid: 0bf6d8f1a99ae674f8adc0e332a25c2e, type: 3}
+  cardCorrectSound: {fileID: 8300000, guid: c048db9f9a44a9247905c42b15eca1f0, type: 3}
+  phaseEndSound: {fileID: 8300000, guid: 0e1911bcc6183d343afc09eef6387e07, type: 3}
   instructionsSound: {fileID: 8300000, guid: 657578e4be6b64dbf9b09deada272e55, type: 3}
-  victorySound: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
+  victorySound: {fileID: 8300000, guid: f3af7807bf6d4a64db66bd1080200ef2, type: 3}
   source: {fileID: 1280937000}
 --- !u!4 &1280936999
 Transform:
