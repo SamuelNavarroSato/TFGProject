@@ -1530,6 +1530,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026995, guid: e71f9e26970bb3c44943183cb501a8a3, type: 3}
+      propertyPath: lengthInSec
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5683949060303026995, guid: e71f9e26970bb3c44943183cb501a8a3, type: 3}
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -3563,7 +3567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693d1309c46626746845e1b1cbc6e34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIButtonSound: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+  UIButtonSound: {fileID: 8300000, guid: 654e9727ad9c88e4da20ae92bb7bcfc6, type: 3}
   UIInputSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   cardFlipSound: {fileID: 8300000, guid: 0bf6d8f1a99ae674f8adc0e332a25c2e, type: 3}
   cardCorrectSound: {fileID: 8300000, guid: c048db9f9a44a9247905c42b15eca1f0, type: 3}
@@ -4290,6 +4294,10 @@ PrefabInstance:
     - target: {fileID: 5683949060303026994, guid: e71f9e26970bb3c44943183cb501a8a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5683949060303026995, guid: e71f9e26970bb3c44943183cb501a8a3, type: 3}
+      propertyPath: lengthInSec
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5683949060303026995, guid: e71f9e26970bb3c44943183cb501a8a3, type: 3}
       propertyPath: playOnAwake
