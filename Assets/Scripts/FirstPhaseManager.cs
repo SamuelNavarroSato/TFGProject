@@ -92,10 +92,17 @@ public class FirstPhaseManager : MonoBehaviour
         }
         else
         {
+            string text;
+            text = submittedTextGO.GetComponent<TMPro.TMP_InputField>().text;
+            text = text.ToUpper();
             if (GameManager.Instance.state == GameState.PHASE_A_P1)
-                cardManager.SetCardText(PlayerEnum.PLAYER_1, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
+            {
+                cardManager.SetCardText(PlayerEnum.PLAYER_1, current + cardManager.pairs - 1, text);
+            }
             else if (GameManager.Instance.state == GameState.PHASE_A_P2)
-                cardManager.SetCardText(PlayerEnum.PLAYER_2, current + cardManager.pairs - 1, submittedTextGO.GetComponent<TMPro.TMP_InputField>().text);
+            {
+                cardManager.SetCardText(PlayerEnum.PLAYER_2, current + cardManager.pairs - 1, text);
+            }
 
             submittedTextGO.GetComponent<TMPro.TMP_InputField>().text = "";
 
